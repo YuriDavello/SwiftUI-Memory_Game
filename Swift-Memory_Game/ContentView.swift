@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var emojis = ["🍎", "🍑", "🍒", "🍇", "🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🫐", "🍈", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🥑", "🫑", "🥒"]
-    @State var EmojiCount = 6
+    @State var EmojiCount = 20
     
     var body: some View {
     VStack {
+        Text("Memorize!").font(.largeTitle)
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(emojis[0..<EmojiCount], id: \.self) { emoji in
@@ -23,26 +24,11 @@ struct ContentView: View {
             }
         
         .foregroundColor(.purple)
-        Spacer()
-        
-        HStack {
-            remove
-         Spacer()
-            add
-        }
         .padding(.horizontal)
         .font(.largeTitle)
     }
     .padding(.horizontal)
         }
-    
-    var remove: some View{
-        Button {if EmojiCount > 1 { EmojiCount -= 1}} label: {Image(systemName: "minus.circle")}
-    }
-    
-    var add: some View{
-        Button {if EmojiCount < emojis.count { EmojiCount += 1}} label: {Image(systemName: "plus.circle")}
-    }
     }
 
 struct CardView: View {
