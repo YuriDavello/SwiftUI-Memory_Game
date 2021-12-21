@@ -7,18 +7,24 @@
 
 import SwiftUI
 
-class EmojiViewModel {
+class EmojiViewModel: ObservableObject {
     static let emojis = ["🍎", "🍑", "🍒", "🍇", "🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🫐", "🍈", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🥑", "🫑", "🥒"]
     
-    static func createMemoryGame() -> MemoryGame<String>{
-        MemoryGame<String>(pairsOfCards: 8){ pairIndex in
+    static func createMemoryGame() -> MemoryGameModel<String>{
+        MemoryGameModel<String>(pairsOfCards: 12){ pairIndex in
             emojis[pairIndex]
         }
     }
     
-    private var model = createMemoryGame()
+    @Published private var model = createMemoryGame()
     
-    var cards: Array<MemoryGame<String>.Card> {
-        return model.cards
+    var cards: Array<MemoryGameModel<String>.Card> {
+         model.cards
+    }
+    
+//    MARK: - Intent(s)
+    
+    func choose(_ card: MemoryGameModel<String>.Card) {
+        model.choose(card)
     }
 }
