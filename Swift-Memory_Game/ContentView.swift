@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
     VStack {
-        Text("Memorize!").font(.largeTitle)
+        Text(viewModel.themeName).font(.largeTitle)
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
@@ -25,11 +25,18 @@ struct ContentView: View {
                 }
             }
         
-        .foregroundColor(.purple)
+        .foregroundColor(viewModel.themeColor)
         .padding(.horizontal)
         .font(.largeTitle)
+        
+        Button {
+            viewModel.newGame()
+        } label: {
+            Text("New Game")
+            .font(.largeTitle)
+            }
     }
-    .padding(.horizontal)
+.padding(.horizontal)
         }
     }
 
@@ -42,8 +49,7 @@ struct CardView: View {
             if card.isFaceUp {
             shape.foregroundColor(.white)
             shape.strokeBorder(lineWidth: 3)
-            
-                Text(card.content).font(.largeTitle)
+            Text(card.content).font(.largeTitle)
             } else if card.isMatched {
                 shape.opacity(0)
             }
